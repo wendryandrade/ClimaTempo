@@ -83,7 +83,6 @@ C:\Users\Windows\source\repos\ClimaTempoSimples\ClimaTempoSimples\bin\pt-br\Syst
 C:\Users\Windows\source\repos\ClimaTempoSimples\ClimaTempoSimples\bin\pt-br\System.Web.WebPages.resources.dll
 C:\Users\Windows\source\repos\ClimaTempoSimples\ClimaTempoSimples\bin\pt-br\System.Web.WebPages.Deployment.resources.dll
 C:\Users\Windows\source\repos\ClimaTempoSimples\ClimaTempoSimples\bin\pt-br\System.Web.WebPages.Razor.resources.dll
-C:\Users\Windows\source\repos\ClimaTempoSimples\ClimaTempoSimples\obj\Debug\ClimaTempoSimples.csproj.AssemblyReference.cache
 C:\Users\Windows\source\repos\ClimaTempoSimples\ClimaTempoSimples\obj\Debug\ClimaTempoSimples.csproj.CoreCompileInputs.cache
 C:\Users\Windows\source\repos\ClimaTempoSimples\ClimaTempoSimples\obj\Debug\ClimaTempoSimples.csproj.CopyComplete
 C:\Users\Windows\source\repos\ClimaTempoSimples\ClimaTempoSimples\obj\Debug\ClimaTempoSimples.dll

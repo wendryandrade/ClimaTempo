@@ -37,7 +37,7 @@ namespace ClimaTempoSimples.Controllers
             ViewBag.PrevisaoMaisFria = previsaoMaisFria;
             ViewBag.SelectCidades = new SelectList(cidades, "Id", "Nome");
 
-            return View(ViewBag);
+            return View();
         }
 
         [HttpGet]
@@ -61,8 +61,6 @@ namespace ClimaTempoSimples.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
-
             return View();
         }
     }
