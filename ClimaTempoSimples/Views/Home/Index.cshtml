@@ -1,0 +1,125 @@
+﻿@{
+    ViewBag.Title = "Clima Tempo";
+}
+
+<div class="jumbotron">
+    <h1>@(ViewBag.Title)</h1>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">Cidades mais quentes hoje</h3>
+            </div>
+            <div class="panel-body">
+                @foreach (var item in ViewBag.PrevisaoMaisQuente)
+                {
+                    <div class="row">
+                        <div class="col-xs-6">
+                            @(item.Cidade.Nome)
+                        </div>
+                        <div class="col-xs-3">
+                            Min @(item.TemperaturaMinima.ToString())°C
+                        </div>
+                        <div class="col-xs-3">
+                            Max @(item.TemperaturaMaxima.ToString())°C
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">Cidades mais frias hoje</h3>
+            </div>
+            <div class="panel-body">
+                @foreach (var item in ViewBag.PrevisaoMaisFria)
+                {
+                    <div class="row">
+                        <div class="col-xs-6">
+                            @(item.Cidade.Nome)
+                        </div>
+                        <div class="col-xs-3">
+                            Min @(item.TemperaturaMinima.ToString())°C
+                        </div>
+                        <div class="col-xs-3">
+                            Max @(item.TemperaturaMaxima.ToString())°C
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div id="div-select" class="col-xs-12" style="margin-bottom: 20px;">
+        @Html.DropDownList("SelectCidades", @ViewBag.SelectCidades as List<SelectListItem>, "Selecione uma Cidade", new { @class = "form-control" })
+    </div>
+    <div id="div-previsoes">
+    </div>
+</div>
+
+@section scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#SelectCidades").select2();
+
+            $("#SelectCidades").change(function () {
+                $("#div-previsoes").html("");
+                $.ajax({
+                    type: 'get',
+                    dataType: 'json',
+                    url: '/Home/CarregarPrevisoesDaSemana?id=' + $(this).val(),
+                    success: function (response) {
+                        for (var i in response.data) {
+                            var html = "\
+                                <div class='col-xs-6 col-md-3'>\
+                                    <div class='panel panel-primary'>\
+                                        <div class='panel-heading'>\
+                                            <h3 class='panel-title'>" + getDiaFormatado(response.data[i].DataPrevisao) + "</h3>\
+                                        </div >\
+                                        <div class='panel-body'>\
+                                            <div class='row'><div class='col-xs-12'>" + response.data[i].Clima +"</div></div>\
+                                            <div class='row'><div class='col-xs-12'>Mínima: " + response.data[i].TemperaturaMinima + "°C</div></div>\
+                                            <div class='row'><div class='col-xs-12'>Máxima: " + response.data[i].TemperaturaMaxima + "°C</div></div>\
+                                        </div>\
+                                    </div>\
+                                </div>";
+                            $("#div-previsoes").append(html);
+                        }
+                        //Render data to view maybe using jquery etc
+                    },
+                    error: function (data) {
+                        //Notify user of error
+                    }
+                });
+            });
+
+            function getDiaFormatado(dataPrevisao) {
+                var dataPrevisao = new Date(parseInt(dataPrevisao.replace(/[^0-9 +]/g, '')));
+                switch (dataPrevisao.getUTCDay()) {
+                    case 0:
+                        return "Domingo";
+                    case 1:
+                        return "Segunda-feira";
+                    case 2:
+                        return "Terça-feira";
+                    case 3:
+                        return "Quarta-feira";
+                    case 4:
+                        return "Quinta-feira";
+                    case 5:
+                        return "Sexta-feira";
+                    case 6:
+                        return "Sábado";
+                    default:
+                        return "-";
+                }
+            }
+        });
+    </script>
+}

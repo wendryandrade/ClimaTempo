@@ -1,0 +1,4 @@
+.vs
+#NuGet
+packages
+!packages/repositories.config
